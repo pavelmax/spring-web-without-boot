@@ -9,7 +9,7 @@
             height: 100%;
         }
         body {
-            background: linear-gradient(to bottom, #fff, #eee 90%);
+            background: #f0f0f0;
         }
 
     </style>
