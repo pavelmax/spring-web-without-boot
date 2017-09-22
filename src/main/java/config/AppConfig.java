@@ -21,6 +21,7 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 @Configuration
 @EnableWebMvc
@@ -57,7 +58,10 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
         localSessionFactoryBean.setDataSource(source);
         localSessionFactoryBean.setPackagesToScan("model.entity");
-        localSessionFactoryBean.getHibernateProperties().put("hibernate.dialect", environment.getProperty("hibernate.dialect"));
+
+        Properties hibernateProperties = localSessionFactoryBean.getHibernateProperties();
+        hibernateProperties.put("hibernate.dialect", environment.getProperty("hibernate.dialect"));
+        hibernateProperties.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
         return localSessionFactoryBean;
     }
     @Bean
@@ -66,7 +70,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         driverManagerDataSource.setDriverClassName(environment.getProperty("db.driver.name"));
         driverManagerDataSource.setUsername(environment.getProperty("db.user.name"));
         driverManagerDataSource.setPassword(environment.getProperty("db.user.password"));
-        driverManagerDataSource.setUrl("db.url");
+        driverManagerDataSource.setUrl(environment.getProperty("db.url"));
         return driverManagerDataSource;
     }
 

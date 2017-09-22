@@ -1,9 +1,16 @@
 package model.entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.util.Date;
 
+@MappedSuperclass
 public abstract class Message extends AbstactEntity {
     private String content;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createAt;
 
     public Message(String content, Date createAt) {

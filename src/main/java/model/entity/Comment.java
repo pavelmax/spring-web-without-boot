@@ -1,7 +1,9 @@
 package model.entity;
 
+import javax.persistence.Entity;
 import java.util.Date;
 
+@Entity
 public class Comment extends Message {
     private Integer like;
     private Integer dislike;

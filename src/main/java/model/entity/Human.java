@@ -1,8 +1,10 @@
 package model.entity;
 
+import javax.persistence.*;
 import java.util.Set;
 
-public class User extends AbstactEntity {
+@Entity
+public class Human extends AbstactEntity {
     private String firstName;
     private String lastName;
     private String middleNames;
@@ -10,9 +12,10 @@ public class User extends AbstactEntity {
     private String password;
     private Integer age;
 
+    @OneToMany(targetEntity = Message.class, cascade = CascadeType.REMOVE)
     private Set<Message> messages;
 
-    public User(String firstName, String lastName, String middleNames, String login, String password, Integer age, Set<Message> messages) {
+    public Human(String firstName, String lastName, String middleNames, String login, String password, Integer age, Set<Message> messages) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.middleNames = middleNames;

@@ -1,7 +1,9 @@
 package model.entity;
 
+import javax.persistence.Entity;
 import java.util.Date;
 
+@Entity
 public class News extends Message {
     private String title;
 
