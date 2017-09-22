@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -23,6 +24,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableWebMvc
+@PropertySource(value = "classpath:db.properties")
 @ComponentScan(value = "controller")
 public class AppConfig extends WebMvcConfigurerAdapter {
     @Autowired
@@ -55,6 +57,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
         localSessionFactoryBean.setDataSource(source);
         localSessionFactoryBean.setPackagesToScan("model.entity");
+        localSessionFactoryBean.getHibernateProperties().put("hibernate.dialect", environment.getProperty("hibernate.dialect"));
         return localSessionFactoryBean;
     }
     @Bean
