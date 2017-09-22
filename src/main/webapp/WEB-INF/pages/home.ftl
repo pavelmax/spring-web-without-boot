@@ -16,7 +16,6 @@
 </head>
 <body>
 <div class="container-fluid mt-3">
-
     <div class="row">
         <div class="col-md-2">
             <h5 class="text-left">Элементы управления:</h5>

@@ -1,9 +1,12 @@
 package config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DataSourceUtils;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.embedded.DataSourceFactory;
 import org.springframework.jdbc.datasource.init.DataSourceInitializer;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
@@ -22,6 +25,8 @@ import javax.sql.DataSource;
 @EnableWebMvc
 @ComponentScan(value = "controller")
 public class AppConfig extends WebMvcConfigurerAdapter {
+    @Autowired
+    private Environment environment;
 
     @Bean
     public ViewResolver resolver() {
@@ -46,10 +51,20 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public LocalSessionFactoryBean sessionFactoryBean(DataSource source) {
+    public LocalSessionFactoryBean sessionFactoryBean(final DataSource source) {
         LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
         localSessionFactoryBean.setDataSource(source);
+        localSessionFactoryBean.setPackagesToScan("model.entity");
         return localSessionFactoryBean;
+    }
+    @Bean
+    public DataSource dataSource() {
+        DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
+        driverManagerDataSource.setDriverClassName(environment.getProperty("db.driver.name"));
+        driverManagerDataSource.setUsername(environment.getProperty("db.user.name"));
+        driverManagerDataSource.setPassword(environment.getProperty("db.user.password"));
+        driverManagerDataSource.setUrl("db.url");
+        return driverManagerDataSource;
     }
 
 }
