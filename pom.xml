@@ -8,17 +8,6 @@
     <artifactId>mvc-web</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
-    <properties>
-        <urlTomcat>
-            localhost:8081/manager
-        </urlTomcat>
-        <serverTomcat>
-            tomcat
-        </serverTomcat>
-        <pathTomcat>
-            /mywebapp
-        </pathTomcat>
-    </properties>
 
     <dependencyManagement>
         <dependencies>
@@ -42,9 +31,26 @@
             <artifactId>spring-web</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+        </dependency>
+        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>4.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.23</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
         </dependency>
     </dependencies>
 
@@ -62,7 +68,7 @@
                 <version>2.2</version>
                 <configuration>
                     <server>apache-tomcat</server>
-                    <url>http://212.30.152.146:8080/manager/text</url>
+                    <url>http://localhost:8081/manager/text</url>
                     <path>/</path>
                     <username>admin</username>
                     <password>admin</password>

@@ -4,17 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/")
 public class HomeController {
-    @RequestMapping("/ivan")
-    public String ivanAction() {
-        return "ivan";
+
+    @RequestMapping("/home")
+    public String indexAction() {
+        return "home";
     }
-    @RequestMapping("/petr")
-    public String petrAction() {
-        return "petr";
-    }
-    @RequestMapping("/pavel")
-    public String pavelAction() {
-        return "pavel";
-    }
+
 }
